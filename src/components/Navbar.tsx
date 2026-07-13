@@ -89,8 +89,8 @@ export default function Navbar(): JSX.Element {
                   </Dropdown.Trigger>
                   <Dropdown.Popover>
                     <Dropdown.Menu onAction={(key) => key === 'logout' && handleSignOut()}>
-                      <Dropdown.Item id="dashboard" className="flex gap-2" href={dashboardHref}><LayoutDashboard className="size-4" /> <Label>Dashboard</Label></Dropdown.Item>
-                      <Dropdown.Item id="logout" className="flex gap-2" variant="danger"><ArrowRightFromSquare className="size-4" /> <Label>Logout</Label></Dropdown.Item>
+                      <Dropdown.Item id="dashboard" className="flex gap-2 text-white" href={dashboardHref}><LayoutDashboard className="size-4" /> <Label>Dashboard</Label></Dropdown.Item>
+                      <Dropdown.Item id="logout" className="flex gap-2 text-white" variant="danger"><ArrowRightFromSquare className="size-4" /> <Label>Logout</Label></Dropdown.Item>
                     </Dropdown.Menu>
                   </Dropdown.Popover>
                 </Dropdown>

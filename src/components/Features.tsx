@@ -23,7 +23,7 @@ export default function Features(): JSX.Element {
   ];
 
   return (
-    <section className="w-full py-24 bg-[#07070a]">
+    <section className="w-full md:py-24 py-12 bg-[#07070a]">
       <div className="w-full max-w-[1200px] mx-auto px-6">
         
         <div className="mb-16 text-center">

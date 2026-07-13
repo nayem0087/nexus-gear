@@ -5,7 +5,7 @@ import { ChartAreaStacked, Activity, Server } from "@gravity-ui/icons";
 
 export default function AnalyticsPreview(): JSX.Element {
   return (
-    <section className="w-full py-24 bg-black border-t border-white/5">
+    <section className="w-full md:py-24 py-12 bg-black border-t border-white/5">
       <div className="w-full max-w-[1200px] mx-auto px-6 grid lg:grid-cols-2 gap-16 items-center">
         
         {/* Left Side: Content */}
