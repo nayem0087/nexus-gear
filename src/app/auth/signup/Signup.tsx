@@ -14,17 +14,16 @@ import {
 } from "@gravity-ui/icons";
 import toast, { Toaster } from "react-hot-toast";
 import { authClient } from "@/lib/auth-client";
-import { Radio, RadioGroup } from "@heroui/react";
 import { useRouter } from "next/navigation";
 
-type Role = "collaborator" | "founder";
+type Role = "user" | "collaborator" | "founder";
 
 interface SignupPageProps {
     redirectTo?: string;
 }
 
 export default function SignupPage({ redirectTo = "/" }: SignupPageProps) {
-    const [role, setRole] = useState<Role>("collaborator");
+    const [role] = useState<Role>("user");
     const [fullName, setFullName] = useState<string>("");
     const [email, setEmail] = useState<string>("");
     const [password, setPassword] = useState<string>("");
@@ -59,7 +58,21 @@ export default function SignupPage({ redirectTo = "/" }: SignupPageProps) {
         setIsLoading(true);
 
         const plan: string =
-            role === "collaborator" ? "collaborator_free" : "founder_free";
+            role === "user"
+                ? "user_free"
+                : role === "founder"
+                ? "founder_free"
+                : "user_free";
+
+        console.log("=== SIGNUP FORM DATA ===");
+        console.log("fullName:", fullName);
+        console.log("email:", email);
+        console.log("password length:", password.length);
+        console.log("confirmPassword length:", confirmPassword.length);
+        console.log("role:", role);
+        console.log("plan:", plan);
+        console.log("profileImage:", profileImage ? `SET (${profileImage.length} chars, base64)` : "null");
+        console.log("========================");
 
         try {
             const { error } = await authClient.signUp.email({
@@ -70,6 +83,10 @@ export default function SignupPage({ redirectTo = "/" }: SignupPageProps) {
                 role,
                 plan,
             });
+
+            console.log("=== SIGNUP RESPONSE ===");
+            console.log("error:", error);
+            console.log("========================");
 
             if (error) {
                 toast.error(error.message || "Something went wrong!");
@@ -126,8 +143,8 @@ export default function SignupPage({ redirectTo = "/" }: SignupPageProps) {
                         </div>
 
                         <h1 className="text-2xl font-bold tracking-tight text-white">
-                            Venture
-                            <span className="text-violet-500">Connect</span>
+                            Nexus
+                            <span className="text-violet-500">Gear</span>
                         </h1>
                     </div>
 
@@ -143,9 +160,7 @@ export default function SignupPage({ redirectTo = "/" }: SignupPageProps) {
                 <div className="mt-6">
                     <Button
                         onPress={handleGoogleSignIn}
-                        fullWidth
-                        variant="bordered"
-                        className="border-white/10 text-white bg-white/5 hover:bg-white/10 h-12 text-medium font-medium rounded-xl transition-all duration-200"
+                        className="w-full border-white/10 text-white bg-white/5 hover:bg-white/10 h-12 text-medium font-medium rounded-xl transition-all duration-200"
                         startContent={
                             <CircleLetterG className="w-5 h-5 text-red-500" />
                         }
@@ -162,35 +177,7 @@ export default function SignupPage({ redirectTo = "/" }: SignupPageProps) {
                     </span>
                 </div>
 
-                <form onSubmit={handleSignup} className="space-y-5">
-                    <div className="flex flex-col gap-4">
-                        <Label>Subscription plan</Label>
-
-                        <RadioGroup
-                            defaultValue="collaborator"
-                            name="role"
-                            onChange={(value: string) => setRole(value as Role)}
-                            orientation="horizontal"
-                        >
-                            <Radio value="collaborator">
-                                <Radio.Content>
-                                    <Radio.Control>
-                                        <Radio.Indicator />
-                                    </Radio.Control>
-                                    Collaborator
-                                </Radio.Content>
-                            </Radio>
-
-                            <Radio value="founder">
-                                <Radio.Content>
-                                    <Radio.Control>
-                                        <Radio.Indicator />
-                                    </Radio.Control>
-                                    Founder
-                                </Radio.Content>
-                            </Radio>
-                        </RadioGroup>
-                    </div>
+                <form onSubmit={handleSignup} className="space-y-5" suppressHydrationWarning>
 
                     <div className="space-y-1.5">
                         <label className="text-sm font-medium text-gray-300">
@@ -204,10 +191,12 @@ export default function SignupPage({ redirectTo = "/" }: SignupPageProps) {
                                 type="text"
                                 placeholder="John Doe"
                                 value={fullName}
+                                autoComplete="name"
                                 onChange={(e: ChangeEvent<HTMLInputElement>) =>
                                     setFullName(e.target.value)
                                 }
                                 className="w-full bg-transparent outline-none border-none text-white placeholder:text-gray-600 text-sm pl-1"
+                                suppressHydrationWarning
                             />
                         </div>
                     </div>
@@ -224,10 +213,12 @@ export default function SignupPage({ redirectTo = "/" }: SignupPageProps) {
                                 type="email"
                                 placeholder="you@example.com"
                                 value={email}
+                                autoComplete="email"
                                 onChange={(e: ChangeEvent<HTMLInputElement>) =>
                                     setEmail(e.target.value)
                                 }
                                 className="w-full bg-transparent outline-none border-none text-white placeholder:text-gray-600 text-sm pl-1"
+                                suppressHydrationWarning
                             />
                         </div>
                     </div>
@@ -270,17 +261,22 @@ export default function SignupPage({ redirectTo = "/" }: SignupPageProps) {
                             Password
                         </label>
 
-                        <div className="flex items-center gap-2 bg-white/5 border border-white/5 hover:bg-white/10 focus-within:border-violet-500/50 focus-within:!bg-white/5 h-12 px-3 rounded-xl transition-all duration-150">
+                        <div
+                            className="flex items-center gap-2 bg-white/5 border border-white/5 hover:bg-white/10 focus-within:border-violet-500/50 focus-within:!bg-white/5 h-12 px-3 rounded-xl transition-all duration-150"
+                            suppressHydrationWarning
+                        >
                             <Lock className="text-gray-500 w-5 h-5 flex-shrink-0" />
 
                             <input
                                 type={isVisible ? "text" : "password"}
                                 placeholder="••••••••"
                                 value={password}
+                                autoComplete="new-password"
                                 onChange={(e: ChangeEvent<HTMLInputElement>) =>
                                     setPassword(e.target.value)
                                 }
                                 className="w-full bg-transparent outline-none border-none text-white placeholder:text-gray-600 text-sm pl-1"
+                                suppressHydrationWarning
                             />
 
                             <button
@@ -309,19 +305,20 @@ export default function SignupPage({ redirectTo = "/" }: SignupPageProps) {
                                 type="password"
                                 placeholder="••••••••"
                                 value={confirmPassword}
+                                autoComplete="new-password"
                                 onChange={(e: ChangeEvent<HTMLInputElement>) =>
                                     setConfirmPassword(e.target.value)
                                 }
                                 className="w-full bg-transparent outline-none border-none text-white placeholder:text-gray-600 text-sm pl-1"
+                                suppressHydrationWarning
                             />
                         </div>
                     </div>
 
                     <Button
                         type="submit"
-                        fullWidth
                         isLoading={isLoading}
-                        className="h-12 bg-purple-600 font-semibold text-white hover:bg-purple-700 rounded-xl transition duration-200 mt-2 text-medium shadow-lg shadow-violet-600/10"
+                        className="w-full h-12 bg-purple-600 font-semibold text-white hover:bg-purple-700 rounded-xl transition duration-200 mt-2 text-medium shadow-lg shadow-violet-600/10"
                     >
                         Create Account 🚀
                     </Button>

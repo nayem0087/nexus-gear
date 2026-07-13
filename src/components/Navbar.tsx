@@ -3,7 +3,7 @@
 import { useState } from "react";
 import Link from "next/link";
 import { Avatar, Button, Spinner, Dropdown, Label, Separator } from "@heroui/react";
-import { Cpu, ChevronDown, ArrowRightFromSquare } from '@gravity-ui/icons'; // Star এর বদলে Cpu
+import { Cpu, ChevronDown, ArrowRightFromSquare } from '@gravity-ui/icons'; 
 import { LayoutDashboard, User as UserIcon } from "lucide-react";
 import { signOut, useSession } from "@/lib/auth-client";
 import { usePathname, useRouter } from "next/navigation";
@@ -40,7 +40,7 @@ export default function Navbar(): JSX.Element {
     { label: "Inventory", href: "/items/manage" },
   ];
 
-  const dashboardHref = '/dashboard'; // আপনার প্রয়োজন অনুযায়ী পাথ সেট করবেন
+  const dashboardHref = '/dashboard'; 
 
   return (
     <nav className="sticky top-0 z-50 border-b border-white/10 bg-[#07070a]/80 backdrop-blur-xl">
@@ -82,15 +82,15 @@ export default function Navbar(): JSX.Element {
             <div className="flex items-center gap-4">
               {isPending ? <Spinner size="sm" /> : user ? (
                 <Dropdown placement="bottom-end">
-                  <Dropdown.Trigger className="flex items-center gap-2 rounded-full border border-white/10 bg-white/5 hover:bg-white/10 pl-1.5 pr-3 py-1 cursor-pointer outline-none">
+                  <Dropdown.Trigger className="flex items-center gap-2 rounded-full text-white bg-black pl-1.5 pr-3 py-1 cursor-pointer outline-none">
                     <Avatar size="sm" src={user?.image || undefined} name={getInitials(user?.name)} className="bg-blue-600" />
                     <span className="text-sm font-semibold text-white">{user.name?.split(" ")[0]}</span>
                     <ChevronDown className="size-3.5 text-gray-400" />
                   </Dropdown.Trigger>
                   <Dropdown.Popover>
                     <Dropdown.Menu onAction={(key) => key === 'logout' && handleSignOut()}>
-                      <Dropdown.Item id="dashboard" href={dashboardHref}><LayoutDashboard className="size-4" /> <Label>Dashboard</Label></Dropdown.Item>
-                      <Dropdown.Item id="logout" variant="danger"><ArrowRightFromSquare className="size-4" /> <Label>Logout</Label></Dropdown.Item>
+                      <Dropdown.Item id="dashboard" className="flex gap-2" href={dashboardHref}><LayoutDashboard className="size-4" /> <Label>Dashboard</Label></Dropdown.Item>
+                      <Dropdown.Item id="logout" className="flex gap-2" variant="danger"><ArrowRightFromSquare className="size-4" /> <Label>Logout</Label></Dropdown.Item>
                     </Dropdown.Menu>
                   </Dropdown.Popover>
                 </Dropdown>

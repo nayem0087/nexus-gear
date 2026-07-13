@@ -28,10 +28,9 @@ export default function RootLayout({ children }: RootLayoutProps): JSX.Element {
     <html
       lang="en"
       data-theme="dark"
-      suppressHydrationWarning
       className={`${geistSans.variable} ${geistMono.variable} dark h-full antialiased`}
     >
-      <body className="min-h-full flex flex-col bg-[#07070a] text-white">
+      <body suppressHydrationWarning={true} className="min-h-full flex flex-col bg-[#07070a] text-white">
         <Navbar />
         <main className="flex-grow">
           {children}

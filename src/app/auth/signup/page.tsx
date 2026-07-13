@@ -2,6 +2,7 @@ import SignupPage from "./Signup";
 
 
 
+
 interface PageProps {
   searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
 }
