@@ -82,7 +82,7 @@ export default function Navbar(): JSX.Element {
             <div className="flex items-center gap-4">
               {isPending ? <Spinner size="sm" /> : user ? (
                 <Dropdown placement="bottom-end">
-                  <Dropdown.Trigger className="flex items-center gap-2 rounded-full text-white bg-black pl-1.5 pr-3 py-1 cursor-pointer outline-none">
+                  <Dropdown.Trigger className="flex items-center gap-2 rounded-full text-white border border-white/10 bg-[#07070a] hover:bg-white/5 pl-1.5 pr-3 py-1 cursor-pointer outline-none transition-colors">
                     <Avatar size="sm" src={user?.image || undefined} name={getInitials(user?.name)} className="bg-blue-600" />
                     <span className="text-sm font-semibold text-white">{user.name?.split(" ")[0]}</span>
                     <ChevronDown className="size-3.5 text-gray-400" />
