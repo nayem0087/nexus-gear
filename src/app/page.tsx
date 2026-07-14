@@ -7,11 +7,13 @@ import Highlights from "@/components/Highlights";
 import Services from "@/components/Services";
 import CTA from "@/components/CTA";
 import HappyCustomers from "@/components/HappyCustomers";
+import ItemsPage from "@/components/ItemsPage";
 
 export default function Home() {
   return (
     <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black">
       <Hero/>
+      <ItemsPage/>
       <Features/>
       <AnalyticsPreview/>
       <Blogs/>
