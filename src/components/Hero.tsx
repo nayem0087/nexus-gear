@@ -7,7 +7,7 @@ import { motion } from "framer-motion";
 
 export default function Hero(): JSX.Element {
   return (
-    <section className="relative w-full min-h-[600px] flex items-center bg-[#07070a] md:py-16 py-12 overflow-hidden">
+    <section className="relative w-full min-h-[600px] flex items-center bg-black md:py-16 py-12 overflow-hidden">
       {/* Background Decorative Elements */}
       <div className="absolute top-0 right-0 w-1/3 h-full bg-blue-500/5 blur-[150px] rounded-full" />
       
