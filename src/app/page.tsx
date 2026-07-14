@@ -3,7 +3,10 @@ import AnalyticsPreview from "@/components/AnalyticsPreview";
 import Blogs from "@/components/Blogs";
 import Features from "@/components/Features";
 import Hero from "@/components/Hero";
+import Highlights from "@/components/Highlights";
 import Services from "@/components/Services";
+import CTA from "@/components/CTA";
+import HappyCustomers from "@/components/HappyCustomers";
 
 export default function Home() {
   return (
@@ -13,6 +16,9 @@ export default function Home() {
       <AnalyticsPreview/>
       <Blogs/>
       <Services/>
+      <Highlights/>
+      <HappyCustomers/>
+      <CTA/>
     </div>
   );
 }
