@@ -64,10 +64,6 @@ export function DashboardSidebar(): ReactElement {
 
             {/* MOBILE DRAWER SIDEBAR */}
             <Drawer>
-                <Drawer.Trigger className="lg:hidden m-4 flex items-center gap-2 rounded-xl border border-zinc-800 bg-zinc-900 px-4 py-2 text-sm font-medium text-white hover:bg-zinc-800 transition-colors">
-                    <LayoutSideContent className="size-5" />
-                    Sidebar
-                </Drawer.Trigger>
 
                 <Drawer.Backdrop className="bg-black/70">
                     <Drawer.Content placement="left" className="bg-black text-white">
